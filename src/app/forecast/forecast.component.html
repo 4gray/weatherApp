@@ -8,13 +8,13 @@
         <li class="list-group-item"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperature: {{forecast.temperature}} &#x2103;</li>
         <li class="list-group-item"><i class="fa fa-tint" aria-hidden="true"></i> Humidity: {{forecast.humidity}} g/m3</li>
         <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true"></i> Location: <a href="http://maps.google.com/maps?q={{forecast.latitude}},{{forecast.longitude}}">{{forecast.latitude}}°, {{forecast.longitude}}°</a></li>
+        <li class="list-group-item"><i class="fa fa-line-chart" aria-hidden="true"></i> Hourly forecast for today:</li>
+        <li class="list-group-item">
+            <canvas baseChart width="400" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        </li>
     </ul>
-    <div class="card-body">
-        <h3 class="card-title">Hourly forecast for today</h3>
-        <canvas baseChart width="400" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-    </div>
 
     <div class="card-footer text-muted">
         Weather update time: {{forecast.timestamp * 1000 | date:'medium'}}
