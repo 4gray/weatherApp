@@ -1,0 +1,17 @@
+.weather-icon {
+    width: 150px; 
+    height: 150px;
+    border-radius: 150px;
+    background: rgba(255, 255, 255, 0.55);
+
+    @media (max-width: 575px) {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 575px) {
+    h3.card-title {
+        font-size: 1.3rem;
+    }
+}

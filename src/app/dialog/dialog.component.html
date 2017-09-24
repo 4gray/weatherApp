@@ -1,0 +1,60 @@
+<div class="card bg-light mb-3">
+    <h4 class="card-header">Get weather forecast</h4>
+
+    <div class="card-body">
+        <p class="card-text">Please enter the latitude and longitude of the location or use your current geolocation.</p>
+        <button class="btn btn-success" (click)="getCurrentLocation()"><i class="fa fa-location-arrow" aria-hidden="true"></i> Get current location</button>
+        <hr>
+
+        <form [formGroup]="weatherForm" (ngSubmit)="getLocationNameByLatLon(weatherForm.value)">
+            <div class="form-group">
+                <label for="latitudeCoord">Latitude</label>
+                <input type="text" name="latitude" class="form-control" id="latitudeCoord" placeholder="Enter latitude (e.g. 52.01)" pattern="^-?\d*\.?\d+$"
+                    formControlName="latitude">
+            </div>
+
+            <!-- validation view for latitude value -->
+            <div *ngIf="weatherForm.controls['latitude'].invalid && (weatherForm.controls['latitude'].dirty || weatherForm.controls['latitude'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="weatherForm.controls['latitude'].errors.pattern">
+                    Only positive and negative decimals from 90 to -90 with dot are allowed
+                </div>
+                <div *ngIf="weatherForm.controls['latitude'].errors.required">
+                    Latitude must be at least 1 character long.
+                </div>
+                <div *ngIf="weatherForm.controls['latitude'].errors.max || weatherForm.controls['latitude'].errors.min">
+                    This latitude value is not valid. Out of range (from -90 to +90).
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="longitudeCoord">Longitude</label>
+                <input type="text" name="longitude" class="form-control" id="longitudeCoord" placeholder="Enter longitude (e.g. 12.0231235)"
+                    pattern="^-?\d*\.?\d+$" formControlName="longitude">
+            </div>
+
+            <!-- validation view for longitude value -->
+            <div *ngIf="weatherForm.controls['longitude'].invalid && (weatherForm.controls['longitude'].dirty || weatherForm.controls['longitude'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="weatherForm.controls['longitude'].errors.pattern">
+                    Only positive and negative decimals from 180 to -180 with dot are allowed
+                </div>
+                <div *ngIf="weatherForm.controls['longitude'].errors.required">
+                    Longitude must be at least 1 character long.
+                </div>
+                <div *ngIf="weatherForm.controls['longitude'].errors.max || weatherForm.controls['longitude'].errors.min">
+                    This longitude value is not valid. Out of range (from -180 to +180).
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!weatherForm.valid"><i class="fa fa-cloud" aria-hidden="true"></i> Show forecast</button>
+        </form>
+
+        <!-- loading overlay with spinner -->
+        <div id="loading-overlay" *ngIf="loading">
+            <img src="../../assets/spinner.gif" id="spinner" />
+        </div>
+
+
+    </div>
+</div>

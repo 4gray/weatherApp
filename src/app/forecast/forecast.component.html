@@ -1,0 +1,22 @@
+<div class="card" *ngIf="forecast">
+    <img class="card-img-top" src="../../assets/bg2.jpeg" alt="location image">
+    <div class="card-img-overlay text-center">
+        <h3 class="card-title">{{forecast.location}}</h3>
+        <p class="card-text"><img src="../../assets/climacons/{{forecast.icon}}.svg" class="weather-icon" /></p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperature: {{forecast.temperature}} &#x2103;</li>
+        <li class="list-group-item"><i class="fa fa-tint" aria-hidden="true"></i> Humidity: {{forecast.humidity}} g/m3</li>
+        <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true"></i> Location: <a href="http://maps.google.com/maps?q={{forecast.latitude}},{{forecast.longitude}}">{{forecast.latitude}}°, {{forecast.longitude}}°</a></li>
+    </ul>
+    <div class="card-body">
+        <h3 class="card-title">Hourly forecast for today</h3>
+        <canvas baseChart width="400" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+    <div class="card-footer text-muted">
+        Weather update time: {{forecast.timestamp * 1000 | date:'medium'}}
+    </div>
+</div>
