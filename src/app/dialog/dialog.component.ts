@@ -48,10 +48,16 @@ export class DialogComponent implements OnInit {
         if (navigator.geolocation) {
             this.loading = true;
             navigator.geolocation.getCurrentPosition(position => {
-                this.latitude = position.coords.latitude;
-                this.longitude = position.coords.longitude;
+                this.weatherForm.controls.latitude.setValue(position.coords.latitude);
+                this.weatherForm.controls.longitude.setValue(position.coords.longitude);
                 this.loading = false;
-            });
+            },
+                error => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        console.error('Geolocation permission was denied by the user. Check your browser settings.');
+                    }
+                    this.loading = false;
+                });
         } else {
             console.error('Sorry, geolocation is not supported by this browser.');
         }
