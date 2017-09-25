@@ -27,7 +27,7 @@ app.get('/api/forecast', function (req, res) {
  * Request time machine data
  */
 app.get('/api/time-machine', function (req, res) {
-    const url = API_REQUEST_URI + req.query.lat + ',' + req.query.lon + ',' + req.query.time + '?exclude=' + req.query.exclude; // set url get parameters
+    const url = API_REQUEST_URI + req.query.lat + ',' + req.query.lon + ',' + req.query.time + '?exclude=' + req.query.exclude + '&units=ca'; // set url get parameters
     fetchData(url, res);
 });
 
