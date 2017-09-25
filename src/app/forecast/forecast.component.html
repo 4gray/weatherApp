@@ -14,6 +14,17 @@
                 [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
         </li>
+        <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i> Daily forecast for next 7 days:</li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" *ngFor="let day of forecast.daily" class="text-center day-forecast">
+                    <div><b>{{day.time * 1000 | date:'mediumDate'}}</b></div>
+                    <div><img src="../../assets/climacons/{{day.icon}}.svg" class="weather-icon-small" /></div>
+                    <div><i class="fa fa-caret-up" aria-hidden="true"></i> {{day.temperatureHigh}}&#x2103;</div>
+                    <div><i class="fa fa-caret-down" aria-hidden="true"></i> {{day.temperatureLow}}&#x2103; </div>
+                </div>
+            </div>
+        </li>
     </ul>
 
     <div class="card-footer text-muted">

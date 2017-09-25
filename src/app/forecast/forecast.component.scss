@@ -10,6 +10,16 @@
     }
 }
 
+.weather-icon-small {
+    width: 75px; 
+    height: 75px;
+}
+
+.day-forecast {
+    padding: 8px;
+    width: 85px;
+}
+
 @media (max-width: 575px) {
     h3.card-title {
         font-size: 1.3rem;

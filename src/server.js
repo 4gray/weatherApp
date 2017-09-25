@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
  * Request forecast data
  */
 app.get('/api/forecast', function (req, res) {
-    const url = API_REQUEST_URI + req.query.lat + ',' + req.query.lon;
+    const url = API_REQUEST_URI + req.query.lat + ',' + req.query.lon + '?units=ca';
     fetchData(url, res);
 });
 

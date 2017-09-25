@@ -98,7 +98,20 @@ export class DialogComponent implements OnInit {
         this.loading = true;
         this.weatherService.requestWeatherByLatLon(latitude, longitude).subscribe(
             response => {
-                const forecast = new LocationForecast(latitude, longitude, response.currently, location || 'Weather forecast');
+                const dailyForecast: Array<any> = [];
+                if (response.daily) {
+                    for (let i = 1; i < response.daily.data.length; i++) {
+                        const element = response.daily.data[i];
+                        dailyForecast.push({
+                            'time': element.time,
+                            'temperatureHigh': element.temperatureHigh.toFixed(1),
+                            'temperatureLow': element.temperatureLow.toFixed(1),
+                            'icon': element.icon
+                        });
+                    }
+                }
+                const forecast = new LocationForecast(latitude, longitude, response.currently,
+                    location || 'Weather forecast', dailyForecast);
                 this.sendForecast(forecast);
                 this.loading = false;
             },

@@ -9,31 +9,28 @@ export class LocationForecast {
     icon: string;
     timestamp: number;
     humidity: number;
+    daily: Array<any>;
 
     /**
      * LocationForecast constructor
      * @param lat Latitude coordinate of the provided location
      * @param lon Longitude coordinate of the provided location
-     * @param data Object with forecast data at the request time ('currently' object); @see https://darksky.net/dev/docs/forecast
+     * @param todayForecast Object with forecast data at the request time ('currently' object); @see https://darksky.net/dev/docs/forecast
+     * @param dailyForecast Array with daily forecast data
      * @param locationName Name of the provided location
      */
-    constructor(private lat, private lon, private data, private location) {
+    constructor(private lat, private lon, private todayForecast, private location, private dailyForecast) {
         this.latitude = lat;
         this.longitude = lon;
-        this.icon = data.icon;
-        this.timestamp = data.time;
-        this.humidity = data.humidity;
-        this.temperature = Number(this.fahrenheitToCelsius(data.temperature).toFixed(1));
+        this.icon = todayForecast.icon;
+        this.timestamp = todayForecast.time;
+        this.humidity = todayForecast.humidity;
+        this.temperature = Number(todayForecast.temperature.toFixed(1));
         this.location = location;
+        this.daily = dailyForecast;
+        console.log(dailyForecast);
     }
 
-    /**
-     * Convert temperature from Fahrenheit to Celsius
-     * @param fahrenheit Temperature in Fahrenheit
-     * @returns Temperature in celsius
-     */
-    fahrenheitToCelsius(fahrenheit) {
-        return (fahrenheit - 32) * 5 / 9;
-    }
+
 
 }
