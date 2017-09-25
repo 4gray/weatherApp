@@ -28,9 +28,6 @@ export class LocationForecast {
         this.temperature = Number(todayForecast.temperature.toFixed(1));
         this.location = location;
         this.daily = dailyForecast;
-        console.log(dailyForecast);
     }
-
-
 
 }

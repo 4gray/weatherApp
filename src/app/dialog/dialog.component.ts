@@ -12,7 +12,7 @@ import { FormBuilder, Validators, FormControl, FormGroup, ValidatorFn, AbstractC
 @Component({
     selector: 'add-location-form',
     templateUrl: './dialog.component.html',
-    styleUrls: ['./dialog.component.css']
+    styleUrls: ['./dialog.component.scss']
 })
 
 export class DialogComponent implements OnInit {
