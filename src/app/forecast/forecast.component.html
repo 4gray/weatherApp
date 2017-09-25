@@ -11,8 +11,7 @@
         <li class="list-group-item"><i class="fa fa-line-chart" aria-hidden="true"></i> Hourly forecast for today:</li>
         <li class="list-group-item">
             <canvas baseChart width="400" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"></canvas>
         </li>
         <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i> Daily forecast for next 7 days:</li>
         <li class="list-group-item">
