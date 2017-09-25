@@ -13,8 +13,8 @@ import { LocationForecast } from 'app/LocationForecast';
 @Injectable()
 export class WeatherService {
     private subject = new Subject<any>();
-    private API_KEY = '2f3819b2795ac93d947ceed9797ef3af';
-    private REQUEST_URI = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/' + this.API_KEY + '/';
+    private REQUEST_FORECAST_URI = '/api/forecast';
+    private REQUEST_TIME_MACHINE_URI = '/api/time-machine';
     private GEOSERVICE_URI = 'http://api.geonames.org/findNearbyPlaceNameJSON?username=weatherapp';
 
     constructor(private http: Http) { }
@@ -25,7 +25,7 @@ export class WeatherService {
      * @param longitude Longitude coordinate of the location 
      */
     requestWeatherByLatLon(latitude: number, longitude: number) {
-        const requestUrl = this.REQUEST_URI + latitude + ',' + longitude;
+        const requestUrl = this.REQUEST_FORECAST_URI + '?lat=' + latitude + '&lon=' + longitude;
         return this.http.get(requestUrl)
             .map(response => response.json())
             .map(data => {
@@ -60,11 +60,11 @@ export class WeatherService {
      */
     getHourlyForecast(latitude: number, longitude: number) {
         const timestamp = Math.floor(Date.now() / 1000);
-        const requestUrl = this.REQUEST_URI
-            + latitude + ','
-            + longitude + ','
-            + timestamp
-            + '?exclude=currently,daily,flags&units=ca';
+        const requestUrl = this.REQUEST_TIME_MACHINE_URI + '?'
+            + 'lat=' + latitude
+            + '&lon=' + longitude
+            + '&time=' + timestamp
+            + '&exclude=currently,daily,flags&units=ca';
 
         return this.http.get(requestUrl)
             .map(response => response.json())
